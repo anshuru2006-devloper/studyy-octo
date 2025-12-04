@@ -1,0 +1,112 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1a5f0569-3609-4dad-aaeb-3884bae1ecc3",
+      "name": "When chat message received",
+      "webhookId": "583e06a9-e2ab-452b-ac68-db642362df2c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4baa0644-5ace-4bca-b1ca-37d6f371f958",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-safeguard-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        128
+      ],
+      "id": "1d43cb6a-bbd0-4f3c-9f12-b9e7b62742f4",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "Wr4ScZRGCpq4j9yx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 500
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "c2de00c2-6bc6-4c68-bff5-7f53e58871cd",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47c5f3cc-7420-4f01-a025-75d43db2b945",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7c113565760ab785732c9baaed7d91f24037af73e05ce0b49390f53b8f183cf3"
+  },
+  "id": "BEPYX2dhyX6JEyKZ",
+  "tags": []
+}
